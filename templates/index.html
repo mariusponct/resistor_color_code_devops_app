@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>5-Band Resistor Color Code Calculator</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">5-Band Resistor Color Code Calculator</h1>
+        <form method="post">
+            <div class="form-group">
+                <label for="band1">Band 1:</label>
+                <select id="band1" name="band1" class="form-control">
+                    {% for color in color_codes.keys() %}
+                    <option value="{{ color }}" {% if color == band1 %}selected{% endif %}>{{ color.capitalize() }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="band2">Band 2:</label>
+                <select id="band2" name="band2" class="form-control">
+                    {% for color in color_codes.keys() %}
+                    <option value="{{ color }}" {% if color == band2 %}selected{% endif %}>{{ color.capitalize() }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="band3">Band 3:</label>
+                <select id="band3" name="band3" class="form-control">
+                    {% for color in color_codes.keys() %}
+                    <option value="{{ color }}" {% if color == band3 %}selected{% endif %}>{{ color.capitalize() }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="multiplier">Multiplier:</label>
+                <select id="multiplier" name="multiplier" class="form-control">
+                    {% for color in color_codes.keys() %}
+                    <option value="{{ color }}" {% if color == multiplier %}selected{% endif %}>{{ color.capitalize() }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="tolerance">Tolerance:</label>
+                <select id="tolerance" name="tolerance" class="form-control">
+                    {% for color in tolerance_codes.keys() %}
+                    <option value="{{ color }}" {% if color == tolerance %}selected{% endif %}>{{ color.capitalize() }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Calculate</button>
+        </form>
+        {% if resistance is not none %}
+        <div class="mt-4">
+            <h2>Resistance: {{ resistance }} Ω</h2>
+            {% if tolerance_value is not none %}
+            <h3>Tolerance: ±{{ tolerance_value }}%</h3>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
