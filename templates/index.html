@@ -21,11 +21,11 @@
     <div class="container mt-5">
         <h1 class="mb-4">5-Band Resistor Color Code Calculator</h1>
         <div class="color-bar">
-            <div id="color1" class="color-block"></div>
-            <div id="color2" class="color-block"></div>
-            <div id="color3" class="color-block"></div>
-            <div id="color4" class="color-block"></div>
-            <div id="color5" class="color-block"></div>
+            <div id="color1" class="color-block" style="background-color: {{ band1 if band1 else 'white' }}"></div>
+            <div id="color2" class="color-block" style="background-color: {{ band2 if band2 else 'white' }}"></div>
+            <div id="color3" class="color-block" style="background-color: {{ band3 if band3 else 'white' }}"></div>
+            <div id="color4" class="color-block" style="background-color: {{ multiplier if multiplier else 'white' }}"></div>
+            <div id="color5" class="color-block" style="background-color: {{ tolerance if tolerance else 'white' }}"></div>
         </div>
         <form id="resistor-form" method="post">
             <div class="form-group">
@@ -96,10 +96,12 @@
             document.getElementById('color' + band).style.backgroundColor = color;
         }
 
-        // Initialize the color bar to white
+        // Initialize the color bar to the selected colors or white
         function initializeColorBar() {
+            var bands = [{{ band1|tojson }}, {{ band2|tojson }}, {{ band3|tojson }}, {{ multiplier|tojson }}, {{ tolerance|tojson }}];
             for (var i = 1; i <= 5; i++) {
-                document.getElementById('color' + i).style.backgroundColor = 'white';
+                var color = bands[i-1];
+                document.getElementById('color' + i).style.backgroundColor = color ? color : 'white';
             }
         }
 
